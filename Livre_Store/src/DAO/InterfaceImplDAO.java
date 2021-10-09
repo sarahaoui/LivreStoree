@@ -81,8 +81,7 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				 livre.setTitre(titre.toString());
 				 livre.setNom_auteur(nom.toString());
 				 livre.setMaison(nom_maison.toString());
-				 livre.setPrenom_auteur(prenom.toString());
-				 
+				 livre.setPrenom_auteur(prenom.toString());			 
 				 list.add(livre);
 				 
 				}
@@ -238,14 +237,80 @@ public class InterfaceImplDAO implements InterfaceDAO {
 
 	@Override
 	public Livre getLivre(int ID) {
-		// TODO Auto-generated method stub
-		return null;
+		Livre liste = new Livre();
+		return liste;
 	}
 
 	@Override
-	public Auteur getAuteur(int ID) {
-		// TODO Auto-generated method stub
-		return null;
+	 public Auteur getAuteur(String ID) {
+		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
+		Model model= SingletonConnection.getModel();
+		
+		Auteur auteur= new Auteur();  
+		StringBuffer buffer= new StringBuffer();
+		
+		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
+		buffer.append("PREFIX rdf"+": <"+"http://www.w3.org/1999/02/22-rdf-syntax-ns#"+">");
+		buffer.append("PREFIX owl"+": <"+"http://www.w3.org/2002/07/owl#"+">");
+		buffer.append("PREFIX xsd"+": <"+"http://www.w3.org/2001/XMLSchema#"+">");
+		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
+		
+		//now add query
+		
+buffer.append("SELECT ?id_auteur ?nom ?prenom ?date_naiss ?telephone ?email ?address ?code_postal\r\n" + 
+		"	WHERE { ?s rdf:type dc:auteur;\r\n" + 
+		"                                       dc:id_auteur  \""+ID+"^^xsd:string \" ;\r\n" + 
+		"                                       dc:id_auteur ?id_auteur ;\r\n" + 
+		"                                       dc:nom ?nom;\r\n" + 
+		"                                       dc:prenom ?prenom;\r\n" + 
+		"                                       dc:date_naiss ?date_naiss;\r\n" + 
+		"                                       dc:email ?email;\r\n" + 
+		"                                       dc:address ?address;\r\n" + 
+		"                                      dc:telephone ?telephone;\r\n" + 
+		"                                      dc:code_postal ?code_postal;\r\n" + 
+		"}");
+				
+                         Query query= QueryFactory.create(buffer.toString());  
+			
+                         QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
+			
+				
+                       try {
+                        ResultSet response=queryExecution.execSelect();  
+			
+                        while(response.hasNext()) {
+                        QuerySolution sol= response.nextSolution();
+                        RDFNode id_auteur=sol.get("?id_auteur");
+						RDFNode nom=sol.get("?nom");
+						RDFNode prenom=sol.get("?prenom");
+						RDFNode date_naiss=sol.get("?date_naiss");
+						RDFNode email=sol.get("?email");
+						RDFNode address=sol.get("?address");
+			            RDFNode telephone=sol.get("?telephone");
+			            RDFNode code_postal=sol.get("?code_postal");
+				
+			            if((nom==null)||(prenom==null)||(date_naiss==null)||(email==null)||(address==null)||(telephone==null)||(id_auteur==null)||(code_postal==null)){
+							System.out.println("there are no data");
+						}else {
+							
+						    
+					     auteur.setId_auteur(id_auteur.toString());
+						 auteur.setNom(nom.toString());
+						 auteur.setPrenom(prenom.toString());
+						 auteur.setDate_naiss(date_naiss.toString());
+						 auteur.setEmail(email.toString());
+						 auteur.setAddress(address.toString());
+						 auteur.setTelephone(telephone.toString());
+		                 auteur.setCode_postal(code_postal.toString());
+		                
+						} 						
+					} 
+				}finally {
+				
+					queryExecution.close();
+				}
+		
+		return auteur;
 	}
 
 	@Override
