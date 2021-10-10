@@ -2,7 +2,9 @@ package Metier.entities;
 
 public class Auteur {
 	
-	private String code_postal; String telephone; String id_auteur;
+	private String code_postal; 
+	private String telephone; 
+	private String id_auteur;
 	private String date_naiss,nom,prenom,address,email;
 	public Auteur(String id_auteur, String telephone, String code_postal, String date_naiss, String nom, String prenom,
 			String address, String email) {
@@ -84,7 +86,7 @@ public class Auteur {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	@Override	
  public String toString() {
 		return "Auteur[Id_auteur= "+id_auteur+" , Nom=" + nom + " , Prenom=" + prenom + " , Date_naiss=" + date_naiss + " , Telephone=" + telephone + " , Email="+ email +" , Address="+address+" , Code_postal="+code_postal+"].";
 

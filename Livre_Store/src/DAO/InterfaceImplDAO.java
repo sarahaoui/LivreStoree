@@ -95,11 +95,11 @@ public class InterfaceImplDAO implements InterfaceDAO {
 	}
 
 	@Override
-	public List<Auteur> AuteursparMC(String MC) {
+	public void AuteursparMC() {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 		Model model= SingletonConnection.getModel();
-		List<Auteur> liste= new ArrayList<>();
 		
+		Auteur auteur= new Auteur();  
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -110,60 +110,60 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		
 		//now add query
 		
-		buffer.append("SELECT ?nom ?prenom ?date_naiss ?telephone ?email ?address ?id_auteur ?code_postal\r\n" + 
-				"	WHERE { ?s rdf:type dc:auteur;\r\n" + 
-				"                                       dc:nom ?nom;\r\n" + 
-				"                                       dc:prenom ?prenom;\r\n" + 
-				"                                       dc:date_naiss ?date_naiss;\r\n" + 
-				"                                       dc:email ?email;\r\n" + 
-				"                                       dc:address ?address;\r\n" + 
-				"                                      dc:telephone ?telephone;\r\n" + 
-				"                                      dc:id_auteur ?id_auteur;\r\n" + 
-				"                                      dc:code_postal ?code_postal;\r\n" + 
-				"FILTER  regex (?nom, \""+MC+"\" , \"i\")}");
-		
-		Query query= QueryFactory.create(buffer.toString());  
-	
-		QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
-	
-		
-		try {
-			ResultSet response=queryExecution.execSelect();  
-	
-			while(response.hasNext()) {
-				QuerySolution sol= response.nextSolution();
-				RDFNode nom=sol.get("?nom");
-				RDFNode prenom=sol.get("?prenom");
-				RDFNode date_naiss=sol.get("?date_naiss");
-				RDFNode email=sol.get("?email");
-				RDFNode address=sol.get("?address");
-	            RDFNode telephone=sol.get("?telephone");
-	            RDFNode id_auteur=sol.get("?id_auteur");
-	            RDFNode code_postal=sol.get("?code_postal");
-		
-				if((nom==null)||(prenom==null)||(date_naiss==null)||(email==null)||(address==null)||(telephone==null)||(id_auteur==null)||(code_postal==null)){
-					System.out.println("there are no data");
-				}else {
-					
-				 Auteur auteur= new Auteur();  
-				 auteur.setNom(nom.toString());
-				 auteur.setPrenom(prenom.toString());
-				 auteur.setDate_naiss(date_naiss.toString());
-				 auteur.setEmail(email.toString());
-				 auteur.setAddress(address.toString());
-				 auteur.setTelephone(telephone.toString()); 
-                 auteur.setId_auteur(id_auteur.toString());
-                 auteur.setCode_postal(code_postal.toString());
-				 liste.add(auteur);
-				 
-				}
+buffer.append("SELECT ?id_auteur ?nom ?prenom ?date_naiss ?telephone ?email ?address ?code_postal\r\n" + 
+		"	WHERE { ?s rdf:type dc:auteur;\r\n" + 
+		"                                       dc:id_auteur  \""+ID+"^^xsd:string \" ;\r\n" + 
+		"                                       dc:id_auteur ?id_auteur ;\r\n" + 
+		"                                       dc:nom ?nom;\r\n" + 
+		"                                       dc:prenom ?prenom;\r\n" + 
+		"                                       dc:date_naiss ?date_naiss;\r\n" + 
+		"                                       dc:email ?email;\r\n" + 
+		"                                       dc:address ?address;\r\n" + 
+		"                                      dc:telephone ?telephone;\r\n" + 
+		"                                      dc:code_postal ?code_postal;\r\n" + 
+		"}");
 				
-			}
-		}finally {
+                         Query query= QueryFactory.create(buffer.toString());  
+			
+                         QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
+			
+				
+                       try {
+                        ResultSet response=queryExecution.execSelect();  
+			
+                        while(response.hasNext()) {
+                        QuerySolution sol= response.nextSolution();
+                        RDFNode id_auteur=sol.get("?id_auteur");
+						RDFNode nom=sol.get("?nom");
+						RDFNode prenom=sol.get("?prenom");
+						RDFNode date_naiss=sol.get("?date_naiss");
+						RDFNode email=sol.get("?email");
+						RDFNode address=sol.get("?address");
+			            RDFNode telephone=sol.get("?telephone");
+			            RDFNode code_postal=sol.get("?code_postal");
+				
+			            if((nom==null)||(prenom==null)||(date_naiss==null)||(email==null)||(address==null)||(telephone==null)||(id_auteur==null)||(code_postal==null)){
+							System.out.println("there are no data");
+						}else {
+							
+						    
+					     auteur.setId_auteur(id_auteur.toString());
+						 auteur.setNom(nom.toString());
+						 auteur.setPrenom(prenom.toString());
+						 auteur.setDate_naiss(date_naiss.toString());
+						 auteur.setEmail(email.toString());
+						 auteur.setAddress(address.toString());
+						 auteur.setTelephone(telephone.toString());
+		                 auteur.setCode_postal(code_postal.toString());
+		                
+						} 						
+					} 
+				}finally {
+				
+					queryExecution.close();
+				}
 		
-			queryExecution.close();
-		}
-		return liste;
+		return auteur;
 	}
 
 	@Override

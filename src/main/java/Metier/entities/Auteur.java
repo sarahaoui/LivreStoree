@@ -1,14 +1,15 @@
 package Metier.entities;
 
 public class Auteur {
-	private int id_auteur,telephone,codepostal;
-	private String date_naiss,nom,prenom,address,email;
-	public Auteur(int id_auteur, int telephone, int codepostal, String date_naiss, String nom, String prenom,
+	
+	
+	private String date_naiss,nom,prenom,address,email,telephone,code_postal,id_auteur;
+	public Auteur(String id_auteur, String telephone, String code_postal, String date_naiss, String nom, String prenom,
 			String address, String email) {
 		super();
 		this.id_auteur = id_auteur;
 		this.telephone = telephone;
-		this.codepostal = codepostal;
+		this.code_postal = code_postal;
 		this.date_naiss = date_naiss;
 		this.nom = nom;
 		this.prenom = prenom;
@@ -20,28 +21,28 @@ public class Auteur {
 		super();
 	}
 
-	public int getId_auteur() {
+	public String getId_auteur() {
 		return id_auteur;
 	}
 
-	public void setId_auteur(int id_auteur) {
+	public void setId_auteur(String id_auteur) {
 		this.id_auteur = id_auteur;
 	}
 
-	public int getTelephone() {
+	public String getTelephone() {
 		return telephone;
 	}
 
-	public void setTelephone(int telephone) {
+	public void setTelephone(String telephone) {
 		this.telephone = telephone;
 	}
 
-	public int getCodepostal() {
-		return codepostal;
+	public String getCode_postal() {
+		return code_postal;
 	}
 
-	public void setCodepostal(int codepostal) {
-		this.codepostal = codepostal;
+	public void setCode_postal(String code_postal) {
+		this.code_postal = code_postal;
 	}
 
 	public String getDate_naiss() {
@@ -83,6 +84,9 @@ public class Auteur {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+	@Override	
+ public String toString() {
+		return "Auteur[Id_auteur= "+id_auteur+" , Nom=" + nom + " , Prenom=" + prenom + " , Date_naiss=" + date_naiss + " , Telephone=" + telephone + " , Email="+ email +" , Address="+address+" , Code_postal="+code_postal+"].";
 
+ }
 }

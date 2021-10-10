@@ -8,12 +8,12 @@ import Metier.entities.Maison;
 public interface InterfaceDAO {
 	
 	public List<Livre> LivresparMC(String MC);
-	public List<Auteur> AuteursparMC(String MC);
-	public List<Maison> MaisonsparMC(String MC);
+	public List<Auteur> AuteursparMC(String Nom);
+	public List<Maison> MaisonsparMC(String Nom);
 	
-	public Livre getLivre(int ID);
-	public Auteur getAuteur(int ID);
-	public Maison getMaison(int ID);
+	public Livre getLivre(String ID);
+	public Auteur getAuteur(String ID);
+	public Maison getMaison(String ID);
 	
 	
 	

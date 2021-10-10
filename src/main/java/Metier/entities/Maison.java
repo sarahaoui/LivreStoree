@@ -1,11 +1,11 @@
 package Metier.entities;
 
-public class Maison {
-	private int id_maison;
-	private String nom_maison,address_maison,siteweb,fax_maison,tel_maison;
+public class Maison{
+	private String id_maison,fax_maison,tel_maison;
+	private String nom_maison,address_maison,siteweb;
 	
 
-	public Maison(int id_maison, String nom_maison, String address_maison, String siteweb, String fax_maison,
+	public Maison(String id_maison, String nom_maison, String address_maison, String siteweb, String fax_maison,
 			String tel_maison) {
 		super();
 		this.id_maison = id_maison;
@@ -21,11 +21,11 @@ public class Maison {
 		super();
 	}
 
-	public int getId_maison() {
+	public String getId_maison() {
 		return id_maison;
 	}
 
-	public void setId_maison(int id_maison) {
+	public void setId_maison(String id_maison) {
 		this.id_maison = id_maison;
 	}
 
@@ -68,6 +68,9 @@ public class Maison {
 	public void setTel_maison(String tel_maison) {
 		this.tel_maison = tel_maison;
 	}
-	
+	 public String toString() {
+			return "Maison[Id_maison = " +id_maison+" , Nom_maison = " + nom_maison + " , Address_maison = " + address_maison + " , Siteweb = " + siteweb + " , Fax_maison = " + fax_maison + " , Tel_maison = "+ tel_maison +"].";
+
+	 }	
 
 }

@@ -13,28 +13,6 @@ public class Test {
 		
    ///////////////////////////////////////////////////////////////////		
         
-       List<Livre> livres= imp.LivresparMC("sparql");
-		
-		for(Livre p :livres) {
-			System.out.println(p.toString());
-		}
-   ///////////////////////////////////////////////////////////////////	
-		
-		 List<Auteur> auteurs= imp.AuteursparMC("smith");
-			
-			for(Auteur p :auteurs) {
-				System.out.println(p.toString());
-			}
-    ///////////////////////////////////////////////////////////////////	
-			List<Maison> maisons= imp.MaisonsparMC("kitab");
-			for(Maison p :maisons) {
-				System.out.println(p.toString());
-			}
-   ///////////////////////////////////////////////////////////////////			
-		Auteur auteur= imp.getAuteur("9");
-		System.out.println(auteur.toString());
-			
-			/////////////////////////////////////			 
-	}
+       imp.AuteursparMC();
 
 }
