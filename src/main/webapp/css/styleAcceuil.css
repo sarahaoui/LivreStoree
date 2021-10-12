@@ -28,7 +28,7 @@ nav {
 }
 nav p {
 	color: white;
-	font-size: 15px;
+	font-size: 14px;
 	margin-top: 5px;
 }
 nav img {
@@ -47,7 +47,7 @@ nav img {
 	transform: translate(-50%, -50%);
 }
 .content h1 {
-	font-size: 42px;
+	font-size: 28px;
 	font-weight: 600;
 	margin-bottom: 20px;
 }
@@ -62,7 +62,7 @@ nav img {
 	color: #1b1f22;
 	cursor: pointer;
 	position: relative;
-	font-size: 17px;
+	font-size: 16px;
 	transition: transform 0.5s;
 }
 

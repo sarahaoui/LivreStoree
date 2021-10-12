@@ -7,7 +7,7 @@ import Metier.entities.Auteur;
 import Metier.entities.Livre;
 import Metier.entities.Maison;
 
-public class Model {
+public class Modell {
 	public String getMc() {
 		return mc;
 	}
@@ -32,9 +32,22 @@ public class Model {
 	public void setMaisons(List<Maison> maisons) {
 		this.maisons = maisons;
 	}
-	private String mc;
+	private String mc,categorie;
 	private List<Auteur> auteurs= new ArrayList<Auteur>();
+	public List<String> getListcategorie() {
+		return listcategorie;
+	}
+	public void setListcategorie(List<String> listcategorie) {
+		this.listcategorie = listcategorie;
+	}
+	public String getCategorie() {
+		return categorie;
+	}
+	public void setCategorie(String categorie) {
+		this.categorie = categorie;
+	}
 	private List<Livre> livres= new ArrayList<Livre>();
 	private List<Maison> maisons= new ArrayList<Maison>();
+	private List<String> listcategorie= new ArrayList<String>();
 
 }

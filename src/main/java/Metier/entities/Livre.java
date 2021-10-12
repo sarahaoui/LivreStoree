@@ -2,8 +2,8 @@ package Metier.entities;
 
 public class Livre {
 	
-	private String titre,sous_titre,resume,categorie,isbn,nom_auteur,prenom_auteur,maison;
-	public Livre(String isbn, String titre, String sous_titre, String resume, String categorie,String nom_auteur,String prenom_auteur,String maison) {
+	private String titre,sous_titre,resume,categorie,isbn,nom_auteur,prenom_auteur,maison,urlimage;
+	public Livre(String urlimage,String isbn, String titre, String sous_titre, String resume, String categorie,String nom_auteur,String prenom_auteur,String maison) {
 		super();
 		this.isbn = isbn;
 		this.titre = titre;
@@ -13,9 +13,16 @@ public class Livre {
 		this.maison = maison;
 		this.nom_auteur = nom_auteur;
 		this.prenom_auteur = prenom_auteur;
+		this.urlimage=urlimage;
 	}
 	public Livre() {
 		super();
+	}
+	public String getUrlimage() {
+		return urlimage;
+	}
+	public void setUrlimage(String urlimage) {
+		this.urlimage = urlimage;
 	}
 	public String getNom_auteur() {
 		return nom_auteur;
@@ -72,7 +79,7 @@ public class Livre {
 	}
 	@Override
 	public String toString() {
-		return "Livre [isbn=" + isbn + ", titre=" + titre + ", sous-titre=" + sous_titre + ", resume=" + resume + " categorie="+categorie+" nom_auteur="+nom_auteur+" prenom _auteur="+prenom_auteur+" maison="+maison+"]";
+		return "Livre [url="+urlimage+"isbn=" + isbn + ", titre=" + titre + ", sous-titre=" + sous_titre + ", resume=" + resume + " categorie="+categorie+" nom_auteur="+nom_auteur+" prenom _auteur="+prenom_auteur+" maison="+maison+"]";
 	}
 
 	

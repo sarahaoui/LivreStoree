@@ -1,0 +1,118 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Poppins', sans-serif;
+}
+.content {
+	display: flex;
+	margin-top: 60px;
+}
+.left {
+	flex-basis: 33%;
+	margin-left: 200px;
+	margin-right: 50px;
+	height: 500px;
+}
+.right {
+	flex-basis: 60%;
+	margin-right: 170px;
+}
+
+.left img {
+	height: 100%;
+	width: 100%;
+}
+.right h2 {
+	font-size: 25px;
+	margin-bottom: 4px;
+	margin-top: 5px;
+	color: #1b1f22;
+	font-weight: 600;
+}
+.right h3 {
+	font-weight: 500;
+	color: #1b1f22;
+	font-size: 17px;
+}
+.informa {
+	margin-top: 100px;
+}
+.informa h3 {
+	color: #254a4e;
+	font-weight: 500;
+	margin: 10px 0;
+	cursor: pointer;
+	font-size: 16px;
+}
+.btn {
+	margin-top: 180px;
+}
+.btn a {
+	background: #1b1f22;
+	color: white;
+	text-decoration: none;
+	padding: 10px 40px;
+	border-radius: 30px;
+	transition: transform 0.5s;
+	font-size: 16px;
+}
+.btn a:hover {
+	transform: scale(0.9);
+}
+.resume {
+	margin: 60px 200px;
+}
+.resume h2 {
+	font-size: 25px;
+	margin-bottom: 4px;
+	color: #1b1f22;
+	font-weight: 600;
+}
+.resume p {
+	color: #1b1f22;
+	line-height: 0.75cm;
+	font-size: 16px;
+}
+.list {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 20px;
+}
+.sidebar {
+	background: #1b1f22;
+	backdrop-filter: blur(15px);
+	width: 170px;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	overflow: auto;
+	visibility: hidden;
+}
+.sidebar .menu {
+	width: 100%;
+	margin-top: 100px;
+}
+.sidebar .menu .item {
+	position: relative;
+	cursor: pointer;
+}
+.sidebar .menu .item a {
+	color: white;
+	font-size: 14px;
+	text-decoration: none;
+	display: block;
+	padding: 5px 30px;
+	line-height: 50px;
+	transition: transform 1s;
+}
+.sidebar .menu .item a:hover{
+	transform: scale(1.08);
+}
+.icon2 {
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 25px;
+}

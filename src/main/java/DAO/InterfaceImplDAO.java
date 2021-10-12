@@ -10,7 +10,9 @@ import org.apache.jena.query.QueryFactory;
 import org.apache.jena.query.QuerySolution;
 import org.apache.jena.query.ResultSet;
 import org.apache.jena.rdf.model.Model;
+import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.rdf.model.RDFNode;
+import org.apache.jena.util.FileManager;
 
 import Metier.entities.Auteur;
 import Metier.entities.Livre;
@@ -19,10 +21,11 @@ import Metier.entities.Maison;
 public class InterfaceImplDAO implements InterfaceDAO {
 
 	@Override
-	public List<Livre> LivresparMC(String MC) {
+	public List<Livre> LivresparMC(String MC,String Categoriee) {
 		
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 		Model model= SingletonConnection.getModel();
+		
 		List<Livre> list= new ArrayList<>();
 		
 		StringBuffer buffer= new StringBuffer();
@@ -34,8 +37,8 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
 		
 		//now add query
-		
-		buffer.append("SELECT ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+		if((Categoriee==null) || (Categoriee.equals("Tous"))) {	
+			buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
 				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
 				+ "                        dc:titre ?titre;\r\n"
 				+ "                        dc:sous-titre ?sous_titre;\r\n"
@@ -43,11 +46,29 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				+ "                        dc:categorie ?categorie;\r\n"
 				+ "                        dc:isbn ?isbn;      \r\n"
 				+ "                        dc:ecrit_par ?ss;    \r\n"
-				+ "                        dc:publie ?sss.     \r\n"
+				+ "                        dc:publie ?sss;     \r\n"
+				+ "                        dc:hasURL ?url.     \r\n"
 				+ "                      ?ss dc:nom ?nom.\r\n"
 				+ "                      ?ss dc:prenom ?prenom.\r\n"
 				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"
-				+ "                    FILTER (regex(?titre, \""+MC+"\",\"i\"))}");
+				+ "                    FILTER (regex(?titre, \""+MC+"\",\"i\"))}");}
+		else {
+				buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
+				+ "                        dc:titre ?titre;\r\n"
+				+ "                        dc:sous-titre ?sous_titre;\r\n"
+				+ "                        dc:resume ?resume;\r\n"
+				+ "                        dc:categorie ?categorie;\r\n"
+				+ "                        dc:isbn ?isbn;      \r\n"
+				+ "                        dc:ecrit_par ?ss;    \r\n"
+				+ "                        dc:publie ?sss;     \r\n"
+				+ "                        dc:hasURL ?url.     \r\n"
+				+ "                      ?ss dc:nom ?nom.\r\n"
+				+ "                      ?ss dc:prenom ?prenom.\r\n"
+				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"
+				+ "                    FILTER (regex(?titre, \""+MC+"\",\"i\"))"
+						+ " FILTER ( ?categorie=\""+Categoriee+"\")}");}
+	
 		
 		Query query= QueryFactory.create(buffer.toString());  
 	
@@ -68,6 +89,7 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				RDFNode nom=sol.get("?nom");
 				RDFNode prenom=sol.get("?prenom");
 				RDFNode nom_maison=sol.get("?nom_maison");
+				RDFNode imageurl=sol.get("?url");
 				
 				if((titre==null)||(sousTitre==null)||(categorie==null)||(resume==null)||(isbn==null)||(nom==null)||(prenom==null)||(nom_maison==null)){
 					System.out.println("there are no data");
@@ -82,6 +104,7 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				 livre.setNom_auteur(nom.toString());
 				 livre.setMaison(nom_maison.toString());
 				 livre.setPrenom_auteur(prenom.toString());
+				 livre.setUrlimage(imageurl.toString());
 				 
 				 list.add(livre);
 				 
@@ -254,13 +277,14 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 		
 		//now add query
 		
-		buffer.append("SELECT ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+		buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
 				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
 				+ "                        dc:titre ?titre;\r\n"
 				+ "                        dc:sous-titre ?sous_titre;\r\n"
 				+ "                        dc:resume ?resume;\r\n"
 				+ "                        dc:categorie ?categorie;\r\n"
 				+ "                        dc:isbn ?isbn;      \r\n"
+				+ "                        dc:hasURL ?url;     \r\n"
 				+ "                        dc:ecrit_par ?ss;    \r\n"
 				+ "                        dc:publie ?sss.     \r\n"
 				+ "                      ?ss dc:nom ?nom.\r\n"
@@ -287,6 +311,7 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				RDFNode nom=sol.get("?nom");
 				RDFNode prenom=sol.get("?prenom");
 				RDFNode nom_maison=sol.get("?nom_maison");
+				RDFNode imageurl=sol.get("?url");
 				
 				if((titre==null)||(sousTitre==null)||(categorie==null)||(resume==null)||(isbn==null)||(nom==null)||(prenom==null)||(nom_maison==null)){
 					System.out.println("there are no data");
@@ -301,6 +326,7 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				 livre.setNom_auteur(nom.toString());
 				 livre.setMaison(nom_maison.toString());
 				 livre.setPrenom_auteur(prenom.toString());
+				 livre.setUrlimage(imageurl.toString());
 				 
 				 
 				 
@@ -452,6 +478,58 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 			queryExecution.close();
 		}
 		return maison;
+	}
+
+	@Override
+	public List<String> getCategorie() {
+		
+		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
+		Model model= SingletonConnection.getModel();
+		
+		List<String> list= new ArrayList<>();
+		
+		StringBuffer buffer= new StringBuffer();
+		
+		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
+		buffer.append("PREFIX rdf"+": <"+"http://www.w3.org/1999/02/22-rdf-syntax-ns#"+">");
+		buffer.append("PREFIX owl"+": <"+"http://www.w3.org/2002/07/owl#"+">");
+		buffer.append("PREFIX xsd"+": <"+"http://www.w3.org/2001/XMLSchema#"+">");
+		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
+		
+		//now add query
+		
+		buffer.append("SELECT DISTINCT ?categorie\r\n"
+				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
+				+ "                 dc:categorie ?categorie.}");
+		
+		Query query= QueryFactory.create(buffer.toString());  
+	
+		QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
+	
+		
+		try {
+			ResultSet response=queryExecution.execSelect();  
+	
+			while(response.hasNext()) {
+				QuerySolution sol= response.nextSolution();
+	
+				RDFNode categorie=sol.get("?categorie");
+				
+				
+				if(categorie==null){
+					System.out.println("there are no data");
+				}else {
+					
+				 list.add(categorie.toString());
+				 
+				}
+				
+			}
+		}finally {
+		
+			queryExecution.close();
+		}
+		return list;
 	}
 
 }

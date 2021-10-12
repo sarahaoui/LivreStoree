@@ -23,8 +23,8 @@
 			</nav>
 
 			<div class="content">
-				<h1>Commencer a rechercher</h1>
-				<a href="Livres" class="open">Commencer</a>
+				<h1>Un lecture vit mille vies avant de mourir...</h1>
+				<a href="livre_index.php" class="open">Commencer</a>
 			</div>
 		</div>
 </body>
