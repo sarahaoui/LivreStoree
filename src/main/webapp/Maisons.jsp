@@ -62,7 +62,7 @@
 							<td>${p.fax_maison}</td>
 							<td>${p.address_maison}</td>
 							<td>${p.siteweb}</td>
-							<td><a href="Suprimer.php?id=${p.id_maison}"><img alt="delete" src="images/deleteblack.png"></a></td>
+							<td><a href="SuprimerMaison.php?id=${p.id_maison}"><img alt="delete" src="images/deleteblack.png"></a></td>
 							<td><a href="Maison.php?id=${p.id_maison}"><img alt="delete" src="images/editblack.png"></a></td>
 							</tr>
 							</c:forEach>

@@ -11,17 +11,19 @@ public class Test {
 
 	public static void main(String[] args) {
 		InterfaceImplDAO imp = new InterfaceImplDAO();
-		List<Livre>livres=imp.LivresparMC("","Tous");
+		/*List<Livre>livres=imp.LivresparMC("","Manga");
 		for(Livre p :livres) {
 			System.out.println(p.toString());
-		}
+		}*/
 		
 	/***********************************************************/
-	   /* List<Auteur> auteur= imp.AuteursparMC("");
+		imp.deleteAuteur("7");
+	    List<Auteur> auteur= imp.AuteursparMC("");
 		
 		for(Auteur p :auteur) {
 			System.out.println(p.toString());
 		}
+		
    /***********************************************************/
  /*List<Maison> maison= imp.MaisonsparMC("");
 		
@@ -30,8 +32,7 @@ public class Test {
 		}
   /***********************************************************/	
 		
-	/*Livre aut = imp.getLivre("140-22-350-600");
-		System.out.println(aut.toString());*/
+	
 /***********************************************************/		
 		/*Auteur aut = imp.getAuteur("9");
 		System.out.println(aut.toString());*/

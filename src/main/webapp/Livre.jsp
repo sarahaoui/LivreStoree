@@ -33,7 +33,7 @@
 				</div>
 
 				<div class="btn">
-					<a href="#">Supprimer</a>
+					<a href="SuprimerLivre.php?id=${livre.isbn}">Supprimer</a>
 					<a href="#">Modifier</a>
 				</div>
 			</div>

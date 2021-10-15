@@ -111,6 +111,21 @@ public class Controleur extends HttpServlet {
 				request.setAttribute("auteur", auteur);
 				request.getRequestDispatcher("EditAuteur.jsp").forward(request, response);
 			}
+			else if(path.equals("/Suprimer.php")) {
+				String id=request.getParameter("id").toString();
+				imp.deleteAuteur(id);
+				response.sendRedirect("Auteurs.php?motCle=");
+				
+			}else if(path.equals("/SuprimerMaison.php")) {
+				String id=request.getParameter("id").toString();
+				imp.deleteMaison(id);
+				response.sendRedirect("Maisons.php?motCle=");
+			}
+			else if(path.equals("/SuprimerLivre.php")) {
+				String id=request.getParameter("id").toString();
+				imp.deleteLivre(id);
+				response.sendRedirect("livre_index.php");
+			}
 	}
 
 	

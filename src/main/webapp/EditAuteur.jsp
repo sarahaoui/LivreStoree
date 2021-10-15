@@ -136,7 +136,7 @@
     </div>
 
 
-      <form name="myForm" onsubmit="return validateForm()" method="post">
+      <form name="myForm" onsubmit="return validateForm()" method="post" action="editAuteur.php">
          <table class="form-style">
             <tr>
                <td>
