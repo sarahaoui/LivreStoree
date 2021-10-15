@@ -2,9 +2,23 @@ package Metier.entities;
 
 public class Livre {
 	
-	private String titre,sous_titre,resume,categorie,isbn,nom_auteur,prenom_auteur,maison,urlimage;
-	public Livre(String urlimage,String isbn, String titre, String sous_titre, String resume, String categorie,String nom_auteur,String prenom_auteur,String maison) {
+	private String id_auteur,id_maison,titre,sous_titre,resume,categorie,isbn,nom_auteur,prenom_auteur,maison,urlimage;
+	public String getId_auteur() {
+		return id_auteur;
+	}
+	public void setId_auteur(String id_auteur) {
+		this.id_auteur = id_auteur;
+	}
+	public String getId_maison() {
+		return id_maison;
+	}
+	public void setId_maison(String id_maison) {
+		this.id_maison = id_maison;
+	}
+	public Livre(String id_auteur,String id_maison,String urlimage,String isbn, String titre, String sous_titre, String resume, String categorie,String nom_auteur,String prenom_auteur,String maison) {
 		super();
+		this.id_auteur=id_auteur;
+		this.id_maison=id_maison;
 		this.isbn = isbn;
 		this.titre = titre;
 		this.sous_titre = sous_titre;

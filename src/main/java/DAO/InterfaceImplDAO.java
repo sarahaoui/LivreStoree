@@ -38,7 +38,7 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		
 		//now add query
 		if((Categoriee==null) || (Categoriee.equals("Tous"))) {	
-			buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+			buffer.append("SELECT ?id_auteur ?id_maison ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
 				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
 				+ "                        dc:titre ?titre;\r\n"
 				+ "                        dc:sous-titre ?sous_titre;\r\n"
@@ -48,12 +48,14 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				+ "                        dc:ecrit_par ?ss;    \r\n"
 				+ "                        dc:publie ?sss;     \r\n"
 				+ "                        dc:hasURL ?url.     \r\n"
+				+ "                      ?ss dc:id_auteur ?id_auteur.\r\n"
 				+ "                      ?ss dc:nom ?nom.\r\n"
 				+ "                      ?ss dc:prenom ?prenom.\r\n"
+				+ "                      ?sss dc:id_maison  ?id_maison.\r\n"
 				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"
 				+ "                    FILTER (regex(?titre, \""+MC+"\",\"i\"))}");}
 		else {
-				buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+				buffer.append("SELECT  ?id_auteur ?id_maison ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
 				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
 				+ "                        dc:titre ?titre;\r\n"
 				+ "                        dc:sous-titre ?sous_titre;\r\n"
@@ -63,9 +65,11 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				+ "                        dc:ecrit_par ?ss;    \r\n"
 				+ "                        dc:publie ?sss;     \r\n"
 				+ "                        dc:hasURL ?url.     \r\n"
+				+ "                      ?ss dc:id_auteur ?id_auteur.\r\n"
 				+ "                      ?ss dc:nom ?nom.\r\n"
 				+ "                      ?ss dc:prenom ?prenom.\r\n"
-				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"
+				+ "                      ?sss dc:id_maison  ?id_maison.\r\n"
+				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"	
 				+ "                    FILTER (regex(?titre, \""+MC+"\",\"i\"))"
 						+ " FILTER ( ?categorie=\""+Categoriee+"\")}");}
 	
@@ -90,6 +94,8 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				RDFNode prenom=sol.get("?prenom");
 				RDFNode nom_maison=sol.get("?nom_maison");
 				RDFNode imageurl=sol.get("?url");
+				RDFNode id_auteur=sol.get("?id_auteur");
+				RDFNode id_maison=sol.get("?id_maison");
 				
 				if((titre==null)||(sousTitre==null)||(categorie==null)||(resume==null)||(isbn==null)||(nom==null)||(prenom==null)||(nom_maison==null)){
 					System.out.println("there are no data");
@@ -105,6 +111,8 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				 livre.setMaison(nom_maison.toString());
 				 livre.setPrenom_auteur(prenom.toString());
 				 livre.setUrlimage(imageurl.toString());
+				 livre.setId_auteur(id_auteur.toString());
+				 livre.setId_maison(id_maison.toString());
 				 
 				 list.add(livre);
 				 
@@ -122,9 +130,8 @@ public class InterfaceImplDAO implements InterfaceDAO {
 	public List<Auteur> AuteursparMC(String Nom) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 		Model model= SingletonConnection.getModel();
-		List<Auteur>listaut= new ArrayList<>();
+		List<Auteur> listee= new ArrayList<>();
 		
-		Auteur auteur= new Auteur();  
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -135,61 +142,64 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		
 		//now add query
 		
-buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
-		+ "SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_auteur ?code_postal \r\n"
-		+ "					WHERE { ?s rdf:type dc:auteur; \r\n"
-		+ "				                                     dc:nom ?nom; \r\n"
-		+ "				                                     dc:prenom ?prenom;\r\n"
-		+ "				                                    dc:date_naiss ?date_naiss; \r\n"
-		+ "				                                   dc:email ?email; \r\n"
-		+ "				                                    dc:address ?address;\r\n"
-		+ "				                                   dc:telephone ?telephone;\r\n"
-		+ "			                                       dc:id_auteur ?id_auteur;\r\n"
-		+ "				                                    dc:code_postal ?code_postal.\r\n"
-		+ "				FILTER(?nom =\""+Nom+"\")}");
-				
-                         Query query= QueryFactory.create(buffer.toString());  
-			
-                         QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
-			
-				
-                       try {
-                        ResultSet response=queryExecution.execSelect();  
-			
-                        while(response.hasNext()) {
-                        QuerySolution sol= response.nextSolution();
-                        RDFNode id_auteur=sol.get("?id_auteur");
-						RDFNode nom=sol.get("?nom");
-						RDFNode prenom=sol.get("?prenom");
-						RDFNode date_naiss=sol.get("?date_naiss");
-						RDFNode email=sol.get("?email");
-						RDFNode address=sol.get("?address");
-			            RDFNode telephone=sol.get("?telephone");
-			            RDFNode code_postal=sol.get("?code_postal");
-				
-			            if((nom==null)||(prenom==null)||(date_naiss==null)||(email==null)||(address==null)||(telephone==null)||(id_auteur==null)||(code_postal==null)){
-							System.out.println("there are no data");
-						}else {
-							
-						    
-						 auteur.setId_auteur(id_auteur.toString());
-						 auteur.setNom(nom.toString());
-						 auteur.setPrenom(prenom.toString());
-						 auteur.setDate_naiss(date_naiss.toString());
-						 auteur.setEmail(email.toString());
-						 auteur.setAddress(address.toString());
-						 auteur.setTelephone(telephone.toString());
-		                 auteur.setCode_postal(code_postal.toString());
-		                 listaut.add(auteur);
-		                
-						} 						
-					} 
-				}finally {
-				
-					queryExecution.close();
-				}
+		buffer.append("SELECT  ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_auteur ?code_postal \r\n"
+				+ "			    WHERE { ?s rdf:type dc:auteur; \r\n"
+				+ "			       dc:nom ?nom; \r\n"
+				+ "			       dc:prenom ?prenom;\r\n"
+				+ "		                              dc:date_naiss ?date_naiss; \r\n"
+				+ "			      dc:email ?email; \r\n"
+				+ "			      dc:address ?address;\r\n"
+				+ "			     dc:telephone ?telephone;\r\n"
+				+ "		         dc:id_auteur ?id_auteur;\r\n"
+				+ "             dc:code_postal ?code_postal.\r\n"
+				+ "			   FILTER(regex(?nom ,\""+Nom+"\",\"i\"))}\r\n"
+				+ "			  ORDERBY ?id_auteur");
 		
-		return listaut;
+		Query query= QueryFactory.create(buffer.toString());  
+	
+		QueryExecution queryExecution= QueryExecutionFactory.create(query,model);  
+	
+		
+		try {
+			ResultSet response=queryExecution.execSelect();  
+	
+			while(response.hasNext()) {
+				QuerySolution sol= response.nextSolution();
+	
+				RDFNode id_auteur=sol.get("?id_auteur");
+				RDFNode nom=sol.get("?nom");
+				RDFNode prenom=sol.get("?prenom");
+				RDFNode date_naiss=sol.get("?date_naiss");
+				RDFNode email=sol.get("?email");
+				RDFNode address=sol.get("?address");
+	            RDFNode telephone=sol.get("?telephone");
+	            RDFNode code_postal=sol.get("?code_postal");
+				
+				if((id_auteur==null)||(nom==null)||(prenom==null)||(date_naiss==null)||(email==null)||(address==null)||(telephone==null)||(code_postal==null)){
+					System.out.println("there are no data");
+				}else {
+					
+				Auteur auteur= new Auteur();
+				 auteur.setId_auteur(id_auteur.toString());
+				 auteur.setNom(nom.toString());
+				 auteur.setPrenom(prenom.toString());
+				 auteur.setDate_naiss(date_naiss.toString());
+				 auteur.setEmail(email.toString());
+				 auteur.setAddress(address.toString());
+				 auteur.setTelephone(telephone.toString());
+                 auteur.setCode_postal(code_postal.toString()); 
+                 
+				 
+				 listee.add(auteur);
+				 
+				}
+				
+			}
+		}finally {
+		
+			queryExecution.close();
+		}
+		return listee;
 		}
 
 	@Override
@@ -216,7 +226,8 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				"                                       dc:siteweb ?siteweb;                                                             \r\n" + 
 				"                                      dc:fax_maison ?fax_maison;\r\n" + 
 				"                                      dc:tel_maison ?tel_maison.\r\n" + 
-				"     FILTER(?nom_maison =\""+Nom+"\")}");
+				"    FILTER(regex(?nom_maison ,\""+Nom+"\",\"i\"))}"
+						+ "ORDER BY ?id_maison");
 		
 		Query query= QueryFactory.create(buffer.toString());  
 	
@@ -277,7 +288,7 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 		
 		//now add query
 		
-		buffer.append("SELECT ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
+		buffer.append("SELECT ?id_auteur ?id_maison ?url ?titre ?sous_titre  ?resume ?categorie ?isbn ?nom_maison  ?nom ?prenom\r\n"
 				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
 				+ "                        dc:titre ?titre;\r\n"
 				+ "                        dc:sous-titre ?sous_titre;\r\n"
@@ -287,8 +298,10 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				+ "                        dc:hasURL ?url;     \r\n"
 				+ "                        dc:ecrit_par ?ss;    \r\n"
 				+ "                        dc:publie ?sss.     \r\n"
+				+ "                      ?ss dc:id_auteur ?id_auteur.\r\n"
 				+ "                      ?ss dc:nom ?nom.\r\n"
 				+ "                      ?ss dc:prenom ?prenom.\r\n"
+				+ "                      ?sss dc:id_maison ?id_maison.\r\n"
 				+ "                      ?sss dc:nom_maison ?nom_maison.\r\n"
 				+ "                       FILTER(?isbn =\""+ID+"\")}");
 		
@@ -312,6 +325,8 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				RDFNode prenom=sol.get("?prenom");
 				RDFNode nom_maison=sol.get("?nom_maison");
 				RDFNode imageurl=sol.get("?url");
+				RDFNode id_auteur=sol.get("?id_auteur");
+				RDFNode id_maison=sol.get("?id_maison");
 				
 				if((titre==null)||(sousTitre==null)||(categorie==null)||(resume==null)||(isbn==null)||(nom==null)||(prenom==null)||(nom_maison==null)){
 					System.out.println("there are no data");
@@ -327,6 +342,8 @@ buffer.append("PREFIX dc: <http://www.livre.com/ontologies/livre.owl#>\r\n"
 				 livre.setMaison(nom_maison.toString());
 				 livre.setPrenom_auteur(prenom.toString());
 				 livre.setUrlimage(imageurl.toString());
+				 livre.setId_auteur(id_auteur.toString());
+				 livre.setId_maison(id_maison.toString());
 				 
 				 
 				 
@@ -533,3 +550,4 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 	}
 
 }
+

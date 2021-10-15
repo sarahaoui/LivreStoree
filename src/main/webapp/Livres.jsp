@@ -23,8 +23,8 @@
 					<ul>
 						<li><a href="acceuil.php">Acceuil</a></li>
 						<li><a href="livre_index.php">Livres</a></li>
-						<li><a href="#">Auteurs</a></li>
-						<li><a href="#">Maisons</a></li>
+						<li><a href="Auteurs.php?motCle= ">Auteurs</a></li>
+						<li><a href="Maisons.php?motCle= ">Maisons</a></li>
 					</ul>
 				</div>
 				<div class="div2">

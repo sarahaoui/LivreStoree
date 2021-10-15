@@ -79,6 +79,37 @@ public class Controleur extends HttpServlet {
 				Livre livre= imp.getLivre(isbn);
 				request.setAttribute("livre", livre);
 				request.getRequestDispatcher("Livre.jsp").forward(request, response);
+				
+			}else if(path.equals("/Auteurs.php")) {
+				String mc= request.getParameter("motCle");
+				List<Auteur>liste = imp.AuteursparMC(mc);
+				Modell model= new Modell();
+				model.setAuteurs(liste);
+				model.setMc(mc);
+				request.setAttribute("model", model);
+				request.getRequestDispatcher("Auteurs.jsp").forward(request, response);
+			}
+			else if(path.equals("/Maisons.php")) {
+			    String mc= request.getParameter("motCle");
+				List<Maison>liste = imp.MaisonsparMC(mc);
+				Modell model= new Modell();
+				model.setMaisons(liste);
+				model.setMc(mc);
+				request.setAttribute("model", model);
+				request.getRequestDispatcher("Maisons.jsp").forward(request, response);
+				
+			}
+			else if(path.equals("/Maison.php")) {
+				String id=request.getParameter("id").toString();
+				Maison maison= imp.getMaison(id);
+				request.setAttribute("maison", maison);
+				request.getRequestDispatcher("EditMaison.jsp").forward(request, response);
+			}
+			else if(path.equals("/Auteur.php")) {
+				String id=request.getParameter("id").toString();
+				Auteur auteur= imp.getAuteur(id);
+				request.setAttribute("auteur", auteur);
+				request.getRequestDispatcher("EditAuteur.jsp").forward(request, response);
 			}
 	}
 

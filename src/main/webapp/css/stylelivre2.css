@@ -37,15 +37,19 @@
 .informa {
 	margin-top: 100px;
 }
-.informa h3 {
+.informa h3{
+	margin: 10px 0;
+}
+.informa h3 a {
 	color: #254a4e;
 	font-weight: 500;
-	margin: 10px 0;
+	
 	cursor: pointer;
+	text-decoration: none;
 	font-size: 16px;
 }
 .btn {
-	margin-top: 180px;
+	margin-top: 150px;
 }
 .btn a {
 	background: #1b1f22;

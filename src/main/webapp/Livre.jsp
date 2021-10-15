@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>${livre.titre}</title>
+<title> Livre:${livre.titre}</title>
 <link rel="stylesheet" href="css/stylelivre2.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com"  />
@@ -26,9 +26,10 @@
 				<h3>${livre.sous_titre}</h3>
 
 				<div class="informa">
+				    <h3>Categorie: ${livre.categorie}</h3>
 					<h3>ISBN: ${livre.isbn}</h3>
-					<h3>Auteur: ${livre.prenom_auteur} ${livre.nom_auteur}</h3>
-					<h3>Maison d'edition: ${livre.maison}</h3>
+					<h3><a href="Auteur.php?id=${livre.id_auteur} ">Auteur: ${livre.prenom_auteur} ${livre.nom_auteur}</a></h3>
+					<h3><a href="Maison.php?id=${livre.id_maison} ">Maison d'edition: ${livre.maison}</a></h3>
 				</div>
 
 				<div class="btn">
@@ -51,8 +52,8 @@
 			<div class="menu">
 				<div class="item"><a href="acceuil.php">Acceuil</a></div>
 				<div class="item"><a href="livre_index.php">Livres</a></div>
-				<div class="item"><a href="#">Auteurs</a></div>
-				<div class="item"><a href="#">Maisons</a></div>
+				<div class="item"><a href="Auteurs.php?motCle= ">Auteurs</a></div>
+				<div class="item"><a href="Maisons.php?motCle= ">Maisons</a></div>
 			</div>
 		</div>
 		<script type="text/javascript">

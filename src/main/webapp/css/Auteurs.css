@@ -1,7 +1,8 @@
-* {
-	margin: 0;
-	padding: 0;
-	font-family: 'Poppins', sans-serif;
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
 }
 .container {
 	background: white;
@@ -44,21 +45,6 @@ form{
 	margin: 20px 0;
 	
 }
-
-form select {
-	outline: none;
-	border: none;
-	background: white;
-	font-size: 13px;
-	color: #1b1f22;
-	padding: 8px 20px;
-	border-radius: 20px;
-	margin-right: 30px;
-	
-}
-select option {
-	margin: 40px;
-}
 .search_box{
 	position: relative;
 	width: 300px;
@@ -91,55 +77,54 @@ select option {
 	
 }
 
-.livres {
-	text-align: center;
+.Auteurs{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 20px;
 }
-.livres h2 {
+.Auteurs h2 {
 	color: #1b1f22;
 	font-weight: 500;
 	font-size: 24px;
-	margin: 30px 12px;
+	margin: 25px 12px;
 	text-align: center;
 }
-.box-container {
-	width: 90%;
-	margin: auto;
-	display: grid;
-	grid-template-columns: repeat(5, 1fr);
-	grid-gap: 80px;
+table {
+	width: 95vw;
+	border-collapse: collapse;
+	border-radius: 30px;
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-radius: 12px 12px 0 0;
+	overflow: hidden;
 	text-align: center;
+	margin-bottom: 20px;
+   
 }
-.box {
-	position: relative;
-	height: 300px;
-	width:160px;
-	transition: transform 1s;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-	align-items: center;
+th {
+	background-color: #1b1f22;
+	color: white;
+	font-weight: 400;
+	font-size: 15px;
 	
 }
-.box a {
-	color: #1b1f22;
-	text-decoration: none;
+
+table td,
+th {
+	padding: 7px 13px;
+	font-size: 15px;
+
+}
+tr:nth-child(odd) {
+	background-color: #eeeeee;
+}
+tbody tr:hover.selected td,
+tbody tr:hover td {
 	cursor: pointer;
-	font-size: 14px;
-	font-weight: 600;
-	
+	background-color:  #6B8A8D;
+	color: white;
 }
-.box h6 {
-	color: #1b1f22;
-	cursor: pointer;
-	font-weight: 500;
-	
-}
-.box img {
-	width: 135px;
-	height: 200px;
-	cursor: pointer;
-	
-}
-.box:hover {
-	transform: scale(1.08);
-}
+
+
