@@ -3,6 +3,7 @@ package Metier.entities;
 public class Livre {
 	
 	private String id_auteur,id_maison,titre,sous_titre,resume,categorie,isbn,nom_auteur,prenom_auteur,maison,urlimage;
+	
 	public String getId_auteur() {
 		return id_auteur;
 	}

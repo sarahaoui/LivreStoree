@@ -29,6 +29,17 @@
         </div>
         <div class="div2">
         <form action="Auteurs.php" method="get">
+        <div>
+					<select name="Sexe" id="sexe">
+					 
+					<option selected disabled >Sexe</option>
+					
+					<option value="femme">femme</option>
+					<option value="homme">homme</option>
+					
+						
+					</select>
+					</div>
           <div class="search_box">
         <input type="text" placeholder="Rechercher sur ..." class="form-style" name="motCle" value="${model.mc}"/>
           <button type="submit"><span class="material-icons">search</span></button>

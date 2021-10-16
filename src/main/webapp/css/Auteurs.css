@@ -45,6 +45,20 @@ form{
 	margin: 20px 0;
 	
 }
+form select {
+	outline: none;
+	border: none;
+	background: white;
+	font-size: 13px;
+	color: #1b1f22;
+	padding: 8px 20px;
+	border-radius: 20px;
+	margin-right: 30px;
+	
+}
+select option {
+	margin: 40px;
+}
 .search_box{
 	position: relative;
 	width: 300px;

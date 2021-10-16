@@ -1,6 +1,7 @@
 package web;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import Metier.entities.Auteur;
@@ -8,6 +9,13 @@ import Metier.entities.Livre;
 import Metier.entities.Maison;
 
 public class Modell {
+	
+	private List<Livre> livres= new ArrayList<Livre>();
+	private List<Maison> maisons= new ArrayList<Maison>();
+	private List<String> listcategorie= new ArrayList<String>();
+	private List<Auteur> auteurs= new ArrayList<Auteur>();
+	private String mc,categorie;
+	
 	public String getMc() {
 		return mc;
 	}
@@ -32,8 +40,7 @@ public class Modell {
 	public void setMaisons(List<Maison> maisons) {
 		this.maisons = maisons;
 	}
-	private String mc,categorie;
-	private List<Auteur> auteurs= new ArrayList<Auteur>();
+	
 	public List<String> getListcategorie() {
 		return listcategorie;
 	}
@@ -46,8 +53,6 @@ public class Modell {
 	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
-	private List<Livre> livres= new ArrayList<Livre>();
-	private List<Maison> maisons= new ArrayList<Maison>();
-	private List<String> listcategorie= new ArrayList<String>();
+	
 
 }

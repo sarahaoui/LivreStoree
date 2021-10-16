@@ -1,6 +1,7 @@
 package Metier.entities;
 
 public class Maison{
+	
 	private String id_maison,fax_maison,tel_maison;
 	private String nom_maison,address_maison,siteweb;
 	

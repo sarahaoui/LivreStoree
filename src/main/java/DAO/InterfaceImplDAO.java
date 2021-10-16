@@ -26,14 +26,12 @@ import Metier.entities.Maison;
 public class InterfaceImplDAO implements InterfaceDAO {
 	Model model= SingletonConnection.getModel();
 
+/********************************************************************/
 	@Override
 	public List<Livre> LivresparMC(String MC,String Categoriee) {
 		
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
-		
 		List<Livre> list= new ArrayList<>();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -133,13 +131,13 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		}
 		return list;
 	}
+	
+	/********************************************************************/
 
 	@Override
-	public List<Auteur> AuteursparMC(String Nom) {
+	public List<Auteur> AuteursparMC(String sexe,String Nom) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
 		List<Auteur> listee= new ArrayList<>();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -149,7 +147,7 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
 		
 		//now add query
-		
+		if((sexe==null) || (sexe.equals("Tous"))) {
 		buffer.append("SELECT  ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_auteur ?code_postal \r\n"
 				+ "			    WHERE { ?s rdf:type dc:auteur; \r\n"
 				+ "			       dc:nom ?nom; \r\n"
@@ -161,7 +159,25 @@ public class InterfaceImplDAO implements InterfaceDAO {
 				+ "		         dc:id_auteur ?id_auteur;\r\n"
 				+ "             dc:code_postal ?code_postal.\r\n"
 				+ "			   FILTER(regex(?nom ,\""+Nom+"\",\"i\"))}\r\n"
-				+ "			  ORDERBY ?id_auteur");
+				+ "			  ORDERBY ?id_auteur");}
+		else {
+			buffer.append("SELECT  ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_auteur ?code_postal \r\n"
+					+ "			    WHERE { ?s rdf:type dc:auteur; \r\n"
+					+ "			       dc:nom ?nom; \r\n"
+					+ "			       dc:prenom ?prenom;\r\n"
+					+ "		                              dc:date_naiss ?date_naiss; \r\n"
+					+ "			      dc:email ?email; \r\n"
+					+ "			      dc:address ?address;\r\n"
+					+ "			     dc:telephone ?telephone;\r\n"
+					+ "		         dc:id_auteur ?id_auteur;\r\n"
+					+ "          rdf:type dc:"+sexe+"; "
+					+ "             dc:code_postal ?code_postal.\r\n"
+					+ "			   FILTER(regex(?nom ,\""+Nom+"\",\"i\"))}\r\n"
+					
+					+ "			  ORDERBY ?id_auteur");
+		}
+		
+		
 		
 		Query query= QueryFactory.create(buffer.toString());  
 	
@@ -209,13 +225,13 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		}
 		return listee;
 		}
+	
+	/********************************************************************/
 
 	@Override
 	public List<Maison> MaisonsparMC(String Nom) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
 		List<Maison> listee= new ArrayList<>();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -279,13 +295,12 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		}
 		return listee;
 	}
-
+	
+	/********************************************************************/
 	@Override
 	public Livre getLivre(String ID) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
 		Livre livre= new Livre();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -370,11 +385,11 @@ public class InterfaceImplDAO implements InterfaceDAO {
 		}
 		return livre;
 	}
-
+	
+	/********************************************************************/
 	@Override
 	 public Auteur getAuteur(String ID) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
 		Auteur auteur= new Auteur();  
 		StringBuffer buffer= new StringBuffer();
 		
@@ -441,12 +456,12 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 		return auteur;
 	}
 
+	/********************************************************************/
+	
 	@Override
 	public Maison getMaison(String ID) {
 		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-
 		Maison maison= new Maison();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -510,14 +525,13 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 		return maison;
 	}
 
+	/********************************************************************/
+	
 	@Override
 	public List<String> getCategorie() {
 		
-		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-
-		
+		String defaultNameSpace= SingletonConnection.getDefaultNameSpace();	
 		List<String> list= new ArrayList<>();
-		
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -529,7 +543,7 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 		//now add query
 		
 		buffer.append("SELECT DISTINCT ?categorie\r\n"
-				+ "WHERE  {?s rdf:type dc:livre;                                       \r\n"
+				+ "WHERE  {?s rdf:type dc:livre; \r\n"
 				+ "                 dc:categorie ?categorie.}");
 		
 		Query query= QueryFactory.create(buffer.toString());  
@@ -562,11 +576,10 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 		return list;
 	}
 	
+	/********************************************************************/
+	
     public void deleteAuteur(String ID) {
     	String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
-		
-		
 		
 		StringBuffer buffer= new StringBuffer();
 		
@@ -589,15 +602,12 @@ buffer.append("SELECT ?nom ?prenom ?date_naiss  ?telephone ?email ?address ?id_a
 		
 	    UpdateAction.parseExecute(buffer.toString(), model);
 	
-		
-    	
     }
     
-    public void updateDataAuteurs(Auteur aut) {
+    /********************************************************************/
+    
+    public void updateDataAuteurs(Auteur aut, String ID) {
 String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
-		
-		
 		
 		StringBuffer buffer= new StringBuffer();
 		
@@ -610,31 +620,33 @@ String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 		//now add query
 		
 		buffer.append("DELETE{?s ?p ?o."
-				+ "          ?s dc:id_auteur ?id_auteur.}"
+				+ "          ?s dc:id_auteur ?id_auteur;"
+				+ "               ?p ?o.}"
 				+ "INSERT {?s rdf:type dc:auteur;"
 				+ "             dc:nom \""+aut.getNom()+"\";"
 						+ "    dc:prenom \""+aut.getPrenom()+"\";"
 						+ "    dc:id_auteur \""+aut.getId_auteur()+"\";"
 						+ "    dc:email  \""+aut.getEmail()+"\";"
-						+ "    dc:date_naiss \""+aut.getEmail()+"\";"
+						+ "    dc:date_naiss \""+aut.getDate_naiss()+"\";"
 					    + "    dc:address   \""+aut.getAddress()+"\";"
 					    + "    dc:telephone  \""+aut.getTelephone()+"\";"
 					    + "    dc:code_postal   \""+aut.getCode_postal()+"\".}"
-					    + "WHERE{"
-					    + "?s ?p ?o ."
-					    + "FILTER(?id_auteur =\""+aut.getId_auteur()+"\")}"
+					    +  "WHERE{ ?s rdf:type dc:auteur;\r\n"
+						+ "          dc:id_auteur ?id_auteur;"
+						+ "                ?p ?o.\r\n"
+						+ "      FILTER(?p NOT IN( dc:ecrit,dc:ecrit_par)) "
+
+						+ "FILTER(?id_auteur =\""+ID+"\")}"
 				              );
 
 	    UpdateAction.parseExecute(buffer.toString(), model);
-
-		
-    	
+	
     }
+    
+    /********************************************************************/
+    
   public void deleteMaison(String ID) {
 	  String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
-		
-		
 		
 		StringBuffer buffer= new StringBuffer();
 		
@@ -656,16 +668,14 @@ String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 				+ "FILTER(?id_maison =\""+ID+"\")}");
 		
 	    UpdateAction.parseExecute(buffer.toString(), model);
-	
-		
-  	
+
   }
+  
+  /********************************************************************/
+  
   public void deleteLivre(String ID) {
 	  String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
-		
-		
-		
-		
+	
 		StringBuffer buffer= new StringBuffer();
 		
 		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
@@ -688,6 +698,81 @@ String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
 	    UpdateAction.parseExecute(buffer.toString(), model);
 	
   }
+  
+  /********************************************************************/
+  
+  public void UpdateDataMaison(Maison maison ,String ID) {
+	  String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
+		
+		StringBuffer buffer= new StringBuffer();
+		
+		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
+		buffer.append("PREFIX rdf"+": <"+"http://www.w3.org/1999/02/22-rdf-syntax-ns#"+">");
+		buffer.append("PREFIX owl"+": <"+"http://www.w3.org/2002/07/owl#"+">");
+		buffer.append("PREFIX xsd"+": <"+"http://www.w3.org/2001/XMLSchema#"+">");
+		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
+		
+		//now add query
+		
+		buffer.append("DELETE{?s ?p ?o."
+				+ "          ?s dc:id_maison ?id_maison;"
+				+ "               ?p ?o.}"
+				+ "INSERT {?s rdf:type dc:maison;"
+				+ "             dc:nom_maison \""+maison.getNom_maison()+"\";"
+						+ "    dc:id_maison \""+maison.getId_maison()+"\";"
+						+ "    dc:address_maison \""+maison.getAddress_maison()+"\";"
+					    + "    dc:siteweb   \""+maison.getSiteweb()+"\";"
+					    + "    dc:tel_maison  \""+maison.getTel_maison()+"\";"
+					    + "    dc:fax_maison   \""+maison.getFax_maison()+"\".}"
+					    +  "WHERE{ ?s rdf:type dc:maison;\r\n"
+						+ "          dc:id_maison ?id_maison;"
+						+ "                ?p ?o.\r\n"
+						+ "      FILTER(?p NOT IN( dc:publie)) "
+
+						+ "FILTER(?id_maison =\""+ID+"\")}"
+				              );
+		  
+	    UpdateAction.parseExecute(buffer.toString(), model);
+  }
+  
+ /*************************************************************/ 
+  
+  public void updateDataLivre(Livre livre,String ID) {
+	  String defaultNameSpace= SingletonConnection.getDefaultNameSpace();
+		
+		StringBuffer buffer= new StringBuffer();
+		
+		buffer.append("PREFIX dc"+": <"+defaultNameSpace+">");
+		buffer.append("PREFIX rdf"+": <"+"http://www.w3.org/1999/02/22-rdf-syntax-ns#"+">");
+		buffer.append("PREFIX owl"+": <"+"http://www.w3.org/2002/07/owl#"+">");
+		buffer.append("PREFIX xsd"+": <"+"http://www.w3.org/2001/XMLSchema#"+">");
+		buffer.append("PREFIX rdfs"+": <"+"http://www.w3.org/2000/01/rdf-schema#"+">");
+		
+		//now add query
+		
+		buffer.append("DELETE{?s ?p ?o."
+				+ "          ?s dc:isbn ?isbn;"
+				+ "               ?p ?o.}"
+				+ "INSERT {?s rdf:type dc:livre ;"
+				+ "             dc:titre  \""+livre.getTitre()+"\";"
+						+ "    dc:sous-titre  \""+livre.getSous_titre()+"\";"
+						+ "    dc:categorie  \""+livre.getCategorie()+"\";"
+						+ "    dc:resume   \""+livre.getResume()+"\";"
+						+ "    dc:isbn  \""+livre.getIsbn()+"\";"
+						+ "    dc:hasURL  \""+livre.getUrlimage()+"\".}"
+					    +  "WHERE{ ?s rdf:type dc:livre;\r\n"
+						+ "          dc:isbn ?isbn;"
+						+ "                ?p ?o.\r\n"
+						+ "      FILTER(?p NOT IN( dc:ecrit,dc:ecrit_par,dc:publie)) "
+
+						+ "FILTER(?isbn =\""+ID+"\")}"
+				              );
+	
+ 
+	    UpdateAction.parseExecute(buffer.toString(), model); 
+  }
+  
+  
 
 }
 

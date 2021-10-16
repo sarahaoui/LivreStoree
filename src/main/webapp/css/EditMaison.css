@@ -38,13 +38,13 @@
   color: white; 
   cursor: pointer;
   padding: 9px 25px;
+  transition: transform 0.5s;
   
   
   
 }
 .form-style input[type=submit]:hover, .form-style input[type=reset]:hover{
-  color:black;
-  background: white;
+  transform: scale(0.9);
 }
 
 .form-style input[type=text], input[type=email], 

@@ -14,109 +14,7 @@
 		<link rel="shortcut icon" href="images/logo.png" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-   <script> 
-            function validateForm()                                    
-{
-
-    var email = document.forms["myForm"]["email"];
-    var name = document.forms["myForm"]["name"]; 
-    var prenom = document.forms["myForm"]["prenom"];
-    var adresse = document.forms["myForm"]["adresse"];
-    var date = document.forms["myForm"]["date"];
-    var ID = document.forms["myForm"]["ID"];
-    var code = document.forms["myForm"]["code"];
-    var tlf = document.forms["myForm"]["tlf"];
-    ////////////////////////////////
-    if (ID.value == "")                                  
-    { 
-        document.getElementById('errorID').innerHTML="Veuillez entrez un ID valide";  
-        name.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorID').innerHTML="";  
-    }
-
-    ////////////////////////////////
-    if (name.value == "")                                  
-    { 
-        document.getElementById('errorname').innerHTML="Veuillez entrez un nom valide";  
-        name.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorname').innerHTML="";  
-    }
-   /////////////////////////////////
-   if (prenom.value == "")                                  
-    { 
-        document.getElementById('errorprenom').innerHTML="Veuillez entrez un prenom valide";  
-        prenom.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorprenom').innerHTML="";  
-    }
-
-    ///////////////////////////////
-    if (email.value == "")                                   
-    { 
-        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
-        email.focus(); 
-        return false; 
-    }else{
-        document.getElementById('erroremail').innerHTML="";  
-    }
    
-    if (email.value.indexOf("@", 0) < 0)                 
-    { 
-        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
-        email.focus(); 
-        return false; 
-    } 
-   
-    if (email.value.indexOf(".", 0) < 0)                 
-    { 
-        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
-        email.focus(); 
-        return false; 
-    }
-    ///////////////////////
-    if (adresse.value == "")                                  
-    { 
-        document.getElementById('erroradresse').innerHTML="Veuillez entrez une adresse valide";  
-        adresse.focus(); 
-        return false; 
-    }else{
-        document.getElementById('erroradresse').innerHTML="";  
-    }
-    ///////////////////////
-    if (date.value == "")                                  
-    { 
-        document.getElementById('errordate').innerHTML="Veuillez entrez une date valide";  
-        date.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errordate').innerHTML="";  
-    }
-    ////////////////////////////////
-    if (code.value == "")                                  
-    { 
-        document.getElementById('errorcode').innerHTML="Veuillez entrez un code postal valide";  
-        code.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorcode').innerHTML="";  
-    }
-
-    ///////////////////////
-    if (tlf.value == "")                                  
-    { 
-        document.getElementById('errortlf').innerHTML="Veuillez entrez un numéro valide";  
-        tlf.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errortlf').innerHTML="";  
-    }    
-}
-   </script>
  </head>
 
    <body>
@@ -231,5 +129,108 @@ model2.addEventListener('click',function(){
   document.querySelector('.sidebar').style.visibility= 'hidden';
 });
 </script>
+<script> 
+            function validateForm()                                    
+{
+
+    var email = document.forms["myForm"]["email"];
+    var name = document.forms["myForm"]["name"]; 
+    var prenom = document.forms["myForm"]["prenom"];
+    var adresse = document.forms["myForm"]["adresse"];
+    var date = document.forms["myForm"]["date"];
+    var ID = document.forms["myForm"]["ID"];
+    var code = document.forms["myForm"]["code"];
+    var tlf = document.forms["myForm"]["tlf"];
+    ////////////////////////////////
+    if (ID.value == "")                                  
+    { 
+        document.getElementById('errorID').innerHTML="Veuillez entrez un ID valide";  
+        name.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorID').innerHTML="";  
+    }
+
+    ////////////////////////////////
+    if (name.value == "")                                  
+    { 
+        document.getElementById('errorname').innerHTML="Veuillez entrez un nom valide";  
+        name.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorname').innerHTML="";  
+    }
+   /////////////////////////////////
+   if (prenom.value == "")                                  
+    { 
+        document.getElementById('errorprenom').innerHTML="Veuillez entrez un prenom valide";  
+        prenom.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorprenom').innerHTML="";  
+    }
+
+    ///////////////////////////////
+    if (email.value == "")                                   
+    { 
+        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
+        email.focus(); 
+        return false; 
+    }else{
+        document.getElementById('erroremail').innerHTML="";  
+    }
+   
+    if (email.value.indexOf("@", 0) < 0)                 
+    { 
+        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
+        email.focus(); 
+        return false; 
+    } 
+   
+    if (email.value.indexOf(".", 0) < 0)                 
+    { 
+        document.getElementById('erroremail').innerHTML="Veuillez entrez une adresse mail valide"; 
+        email.focus(); 
+        return false; 
+    }
+    ///////////////////////
+    if (adresse.value == "")                                  
+    { 
+        document.getElementById('erroradresse').innerHTML="Veuillez entrez une adresse valide";  
+        adresse.focus(); 
+        return false; 
+    }else{
+        document.getElementById('erroradresse').innerHTML="";  
+    }
+    ///////////////////////
+    if (date.value == "")                                  
+    { 
+        document.getElementById('errordate').innerHTML="Veuillez entrez une date valide";  
+        date.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errordate').innerHTML="";  
+    }
+    ////////////////////////////////
+    if (code.value == "")                                  
+    { 
+        document.getElementById('errorcode').innerHTML="Veuillez entrez un code postal valide";  
+        code.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorcode').innerHTML="";  
+    }
+
+    ///////////////////////
+    if (tlf.value == "")                                  
+    { 
+        document.getElementById('errortlf').innerHTML="Veuillez entrez un numéro valide";  
+        tlf.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errortlf').innerHTML="";  
+    }    
+}
+   </script>
    </body>
 </html>

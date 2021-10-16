@@ -38,12 +38,12 @@
   color: white; 
   cursor: pointer;
   padding: 9px 25px;
+  transition: transform 0.5s;
   
   
 }
 .form-style input[type=submit]:hover, .form-style input[type=reset]:hover{
-  background: #1b1f22;
-  background: white;
+  transform: scale(0.9);
   
 }
 

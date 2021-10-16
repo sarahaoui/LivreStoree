@@ -4,6 +4,7 @@ public class Auteur {
 	
 	
 	private String date_naiss,nom,prenom,address,email,telephone,code_postal,id_auteur;
+	
 	public Auteur(String id_auteur, String telephone, String code_postal, String date_naiss, String nom, String prenom,
 			String address, String email) {
 		super();

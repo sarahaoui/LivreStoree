@@ -13,73 +13,7 @@
 		<link rel="shortcut icon" href="images/logo.png" />
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
-   <script> 
-            function validateForm()                                    
-{
-
-    var site = document.forms["myForm"]["site"];
-    var name = document.forms["myForm"]["name"]; 
-    var adresse = document.forms["myForm"]["adresse"];
-    var ID = document.forms["myForm"]["ID"];
-    var tlf = document.forms["myForm"]["tlf"];
-    var fax = document.forms["myForm"]["fax"];
-    ////////////////////////////////
-    if (ID.value == "")                                  
-    { 
-        document.getElementById('errorID').innerHTML="Veuillez entrez un ID valide";  
-        name.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorID').innerHTML="";  
-    }
-
-    ////////////////////////////////
-    if (name.value == "")                                  
-    { 
-        document.getElementById('errorname').innerHTML="Veuillez entrez un nom valide";  
-        name.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorname').innerHTML="";  
-    }
-    ///////////////////////
-    if (adresse.value == "")                                  
-    { 
-        document.getElementById('erroradresse').innerHTML="Veuillez entrez une adresse valide";  
-        adresse.focus(); 
-        return false; 
-    }else{
-        document.getElementById('erroradresse').innerHTML="";  
-    }
-    ///////////////////////
-    if (tlf.value == "")                                  
-    { 
-        document.getElementById('errortlf').innerHTML="Veuillez entrez un numéro de téléphone valide";  
-        tlf.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errortlf').innerHTML="";  
-    } 
-    ///////////////////////
-    if (fax.value == "")                                  
-    { 
-        document.getElementById('errorfax').innerHTML="Veuillez entrez un numéro de fax valide";  
-        fax.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorfax').innerHTML="";  
-    }       
-    ///////////////////////////////
-    if (site.value == "")                                  
-    { 
-        document.getElementById('errorsite').innerHTML="Veuillez entrez un Siteweb valide";  
-        site.focus(); 
-        return false; 
-    }else{
-        document.getElementById('errorsite').innerHTML="";  
-    }       
-}
-   </script>
+  
  </head>
 
    <body>
@@ -99,7 +33,7 @@
     </div>
 
 
-      <form name="myForm" onsubmit="return validateForm()" method="post">
+      <form name="myForm" onsubmit="return validateForm()" method="post" action="editMaison.php">
          <table class="form-style">
             <tr>
                <td>
@@ -176,5 +110,72 @@ model2.addEventListener('click',function(){
   document.querySelector('.sidebar').style.visibility= 'hidden';
 });
 </script>
+ <script> 
+            function validateForm()                                    
+{
+
+    var site = document.forms["myForm"]["site"];
+    var name = document.forms["myForm"]["name"]; 
+    var adresse = document.forms["myForm"]["adresse"];
+    var ID = document.forms["myForm"]["ID"];
+    var tlf = document.forms["myForm"]["tlf"];
+    var fax = document.forms["myForm"]["fax"];
+    ////////////////////////////////
+    if (ID.value == "")                                  
+    { 
+        document.getElementById('errorID').innerHTML="Veuillez entrez un ID valide";  
+        name.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorID').innerHTML="";  
+    }
+
+    ////////////////////////////////
+    if (name.value == "")                                  
+    { 
+        document.getElementById('errorname').innerHTML="Veuillez entrez un nom valide";  
+        name.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorname').innerHTML="";  
+    }
+    ///////////////////////
+    if (adresse.value == "")                                  
+    { 
+        document.getElementById('erroradresse').innerHTML="Veuillez entrez une adresse valide";  
+        adresse.focus(); 
+        return false; 
+    }else{
+        document.getElementById('erroradresse').innerHTML="";  
+    }
+    ///////////////////////
+    if (tlf.value == "")                                  
+    { 
+        document.getElementById('errortlf').innerHTML="Veuillez entrez un numéro de téléphone valide";  
+        tlf.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errortlf').innerHTML="";  
+    } 
+    ///////////////////////
+    if (fax.value == "")                                  
+    { 
+        document.getElementById('errorfax').innerHTML="Veuillez entrez un numéro de fax valide";  
+        fax.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorfax').innerHTML="";  
+    }       
+    ///////////////////////////////
+    if (site.value == "")                                  
+    { 
+        document.getElementById('errorsite').innerHTML="Veuillez entrez un Siteweb valide";  
+        site.focus(); 
+        return false; 
+    }else{
+        document.getElementById('errorsite').innerHTML="";  
+    }       
+}
+   </script>
    </body>
 </html>
