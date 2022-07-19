@@ -1,5 +1,5 @@
 # LivreStoree
-LivreStore ApplicationWeb  with ontology dataset
+LivreStore ApplicationWeb  with ontology database
 
 <h4>Home :</h4>
 <img align="center" alt="Rafa-CSS" height="300" width="500" src="https://user-images.githubusercontent.com/58111836/179846210-c40dade0-ee28-4155-89df-5f38b0e205c4.PNG">
